@@ -17,7 +17,7 @@ function inputHandler(e) {
             country.name.official,
             country.population,
             country.capital,
-            country.languages,
+            country.languages.value,
             country.flags.svg,
             country.flags.alt
           )
@@ -56,6 +56,8 @@ class Country {
   }
 }
 
+console.log(Country.languages)
+
 function updateCountryList(countryList) {
   const ulCountry = document.querySelector('.country-list');
   ulCountry.style.listStyleType = 'none';
@@ -70,13 +72,12 @@ function updateCountryList(countryList) {
     liCountry.style.fontSize = 20;
     liCountry.style.fontFamily = 'Arial, sans-serif';
     liCountry.style.fontWeight = 'bold';
-    liCountry.style.padding = 2;
 
     // Create the <img> element and set its attributes
     const flagImage = document.createElement('img');
     flagImage.setAttribute("width", "40");
     flagImage.style.border = "1px solid black";
-    flagImage.style.margin = 2;
+    flagImage.style.marginRight = 10;
     flagImage.src = flagURL;
     flagImage.alt = flagAlt;
 
@@ -101,25 +102,50 @@ function clearCountryInfo() {
 }
 function updateOneCountry(country) {
   const ulCountry = document.querySelector('.country-list');
+  ulCountry.style.listStyleType = 'none';
   const countryName = country.name;
   const flagURL = country.flagFile;
   const flagAlt = country.alt;
 
   // Create the <li> element
   const liCountry = document.createElement('li');
+    liCountry.style.fontSize = 60;
+    liCountry.style.fontFamily = 'Arial, sans-serif';
+    liCountry.style.fontWeight = 'bold';
 
   // Create the <img> element and set its attributes
   const flagImage = document.createElement('img');
+  flagImage.setAttribute("width", "80");
+  flagImage.style.border = "1px solid black";
+  flagImage.style.marginRight = 10;
   flagImage.src = flagURL;
   flagImage.alt = flagAlt;
 
-  // Create the text node for the country name
-  const textNode = document.createTextNode(countryName);
+   // Create the text node for the country name
+   const textNode = document.createTextNode(countryName);
 
-  // Append the <img> and text node to the <li> element
-  liCountry.appendChild(flagImage);
-  liCountry.appendChild(textNode);
+   // Append the <img> and text node to the <li> element
+   liCountry.appendChild(flagImage);
+   liCountry.appendChild(textNode);
 
-  // Append the <li> element to the <ul> element
-  ulCountry.appendChild(liCountry);
+   // Append the <li> element to the <ul> element
+   ulCountry.appendChild(liCountry);
+
+ const countryInfoDiv = document.querySelector('.country-info');
+ countryInfoDiv.style.fontSize = 20 ;
+ countryInfoDiv.style.fontFamily = 'Arial, sans-serif'
+ countryInfoDiv.style.fontWeight ='bold';
+
+ // Create an array of text content for the paragraphs
+ const paragraphs = [
+   `Capital ${country.capital}`,
+   `Population ${country.population}`,
+   `Languages ${country.languages}`,
+ ];
+ 
+ // Generate the HTML markup for the paragraphs
+ const paragraphsHTML = paragraphs.map(paragraph => `<p>${paragraph}</p>`).join('');
+ 
+ // Insert the HTML markup into the div using innerHTML
+ countryInfoDiv.innerHTML = paragraphsHTML;
 }
