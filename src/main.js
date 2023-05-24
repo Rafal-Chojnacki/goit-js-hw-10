@@ -8,6 +8,12 @@ nameInput.addEventListener('input', debounce(inputHandler, 1000));
 
 function inputHandler(e) {
   const name = e.target.value.trim();
+  if (name === '') { 
+    Notiflix.Notify.info('Please enter any country.');
+    clearList();
+    clearCountryInfo();
+  return;
+  }
 
   fetchCountries(name)
     .then(countries => {
@@ -24,6 +30,7 @@ function inputHandler(e) {
       );
       clearList();
       clearCountryInfo();
+    
       if (countryList.length > 10) {
         Notiflix.Notify.info(
           'Too many matches found. Please enter a more specific name.'
