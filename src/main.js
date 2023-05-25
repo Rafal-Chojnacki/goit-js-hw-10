@@ -45,7 +45,6 @@ function inputHandler(e) {
       updateOneCountry(countryList[0]);
     })
     .catch(error => {
-      console.error(error);
       Notiflix.Notify.warning('Oops, there is no country with that name');
       clearList();
       clearCountryInfo();
