@@ -62,7 +62,7 @@ class Country {
   }
 }
 
-console.log(Country.languages);
+
 
 function updateCountryList(countryList) {
   const ulCountry = document.querySelector('.country-list');
